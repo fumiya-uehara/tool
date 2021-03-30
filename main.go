@@ -1,6 +1,6 @@
 package main
 
-import "github.com/fumiya-uehara/tool/cmd"
+import "fumiya-uehara/tool/cmd"
 
 func main() {
 	cmd.Execute()
