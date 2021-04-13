@@ -14,19 +14,17 @@ var (
 	gflCmd = &cobra.Command{
 		Use: "gfl",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			//			files, err := ioutil.ReadDir("./test")
-			//			if err != nil {
-			//				panic(err)
-			//			}
-			//
-			//			for _, f := range files {
-			//				fmt.Println(f.Name())
-			//			}
 
 			s, err := cmd.Flags().GetString("source")
 			if err != nil {
 				panic(err)
 			}
+
+			savingFile, err := os.Create("./test_output.txt")
+			if err != nil {
+				panic(err)
+			}
+			defer savingFile.Close()
 
 			err = filepath.Walk(s, func(path string, info os.FileInfo, err error) error {
 
@@ -35,7 +33,12 @@ var (
 				}
 
 				if !info.IsDir() {
-					fmt.Printf("path: %#v\n", path)
+
+					if _, err := savingFile.WriteString(path); err != nil {
+						panic(err)
+					}
+					fmt.Fprintf(savingFile, "\n")
+
 				}
 
 				return nil
