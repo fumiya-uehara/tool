@@ -40,8 +40,4 @@ func init() {
 	rootCmd.AddCommand(gflCmd)
 	gflCmd.Flags().StringVarP(&src, "source", "s", "", "source directory")
 	_ = gflCmd.MarkFlagRequired("source")
-
-	//gflCmd.Flags().StringVarP(&dest, "destination", "d", "", "destination directory")
-	//// TODO 一旦マストにしているがない場合は標準出力にしたい。
-	//_ = gflCmd.MarkFlagRequired("dest")
 }
